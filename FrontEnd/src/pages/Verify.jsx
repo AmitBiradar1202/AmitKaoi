@@ -1,11 +1,8 @@
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { assets } from "../assets/assets";
-import CartTotal from '../components/CartTotal';
-import Title from '../components/Title';
 import { ShopContext } from "../context/ShopContext";
-import { useSearchParams } from 'react-router-dom'
 const Verify = () => {
     const { navigate, backendUrl, token, cartItem, setCartItem, delivery_fee, getCartAmount, products } = useContext(ShopContext);
     const [searchParams, setSearchParams] = useSearchParams()
@@ -17,7 +14,7 @@ const Verify = () => {
             if (!token) {
                 return null;
             }
-            const response = await axios.post("http://localhost:8080/api/order/verifyStripe", { success, orderId }, { headers: { token } })
+            const response = await axios.post("https://amitkaoi.onrender.com/api/order/verifyStripe", { success, orderId }, { headers: { token } })
             if (response.data.success) {
                 setCartItem({})
                 navigate('/orders');

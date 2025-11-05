@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Add from "./pages/Add";
 import List from "./pages/List";
 import Order from "./pages/Order";
-export const backendUrl = "http://localhost:8080";
+export const backendUrl = "https://amitkaoi.onrender.com";
 export const currency='$'
 const App = () => {
 

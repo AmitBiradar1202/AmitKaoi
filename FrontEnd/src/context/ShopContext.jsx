@@ -8,7 +8,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
   const currency = '$';
   const delivery_fee = 10;
-  const backendUrl = "http://localhost:8080";
+  const backendUrl = "https://amitkaoi.onrender.com";
   // States
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
@@ -46,7 +46,7 @@ const ShopContextProvider = (props) => {
 
     if (token) {
       try {
-        const response = await axios.post("http://localhost:8080/api/cart/add", { itemId, size }, { headers: { token } });
+        const response = await axios.post("https://amitkaoi.onrender.com/api/cart/add", { itemId, size }, { headers: { token } });
       } catch (err) {
         toast.error(err.message);
         console.log(err);
@@ -106,7 +106,7 @@ const ShopContextProvider = (props) => {
     setCartItem(cartData);
     if (token) {
       try {
-        await axios.post("http://localhost:8080/api/cart/update", { itemId, size, quantity }, { headers: { token } });
+        await axios.post("https://amitkaoi.onrender.com/api/cart/update", { itemId, size, quantity }, { headers: { token } });
       }
       catch (err) {
         console.log(err)
@@ -117,7 +117,7 @@ const ShopContextProvider = (props) => {
   }
   const getUserCart = async (token) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/cart/get",{}, { headers: { token } });
+      const response = await axios.post("https://amitkaoi.onrender.com/api/cart/get",{}, { headers: { token } });
       //console.log(response);
       if (response.data.message) {
         setCartItem(response.data.cartData)
@@ -153,7 +153,7 @@ const ShopContextProvider = (props) => {
 
   const getProductsData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/product/list");
+      const response = await axios.get("https://amitkaoi.onrender.com/api/product/list");
       //console.log(response.data);
       if (response.data.success) {
         setProducts(response.data.products);

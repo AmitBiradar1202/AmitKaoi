@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { currency } from '../App';
 import { assets } from '../assets/assets';
-const backendUrl = "http://localhost:8080";
+const backendUrl = "https://amitkaoi.onrender.com";
 
 const Order = ({ token }) => {
   const [orders, setOrders] = useState([]);
