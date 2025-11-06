@@ -147,18 +147,74 @@ const Add = ({ token }) => {
             </select>
           </div>
 
-          <div>
-            <label className="font-semibold">Sub Category</label>
-            <select
-              value={subCategory}
-              onChange={(e) => setSubCategory(e.target.value)}
-              className="mt-2 w-full border px-3 py-2 rounded-lg"
-            >
-              <option>Topwear</option>
-              <option>Bottomwear</option>
-              <option>Winterwear</option>
-            </select>
-          </div>
+          <div className="relative overflow-visible z-50">
+  <label className="font-semibold">Sub Category</label>
+  <div className="relative">
+    <select
+      value={subCategory}
+      onChange={(e) => setSubCategory(e.target.value)}
+      className="mt-2 w-full border px-3 py-2 rounded-lg bg-white z-50 relative focus:ring-2 focus:ring-pink-300 outline-none"
+    >
+      <optgroup label="Topwear">
+        <option value="T-Shirts">T-Shirts</option>
+        <option value="Shirts">Shirts</option>
+        <option value="Crop Tops">Crop Tops</option>
+        <option value="Hoodies">Hoodies</option>
+        <option value="Sweatshirts">Sweatshirts</option>
+        <option value="Blazers">Blazers</option>
+        <option value="Kurtas & Kurtis">Kurtas & Kurtis</option>
+      </optgroup>
+
+      <optgroup label="Bottomwear">
+        <option value="Jeans">Jeans</option>
+        <option value="Trousers">Trousers</option>
+        <option value="Shorts">Shorts</option>
+        <option value="Track Pants">Track Pants</option>
+        <option value="Skirts">Skirts</option>
+        <option value="Leggings">Leggings</option>
+        <option value="Cargo Pants">Cargo Pants</option>
+      </optgroup>
+
+      <optgroup label="Winterwear">
+        <option value="Jackets">Jackets</option>
+        <option value="Sweaters">Sweaters</option>
+        <option value="Sweatshirts">Sweatshirts</option>
+        <option value="Coats">Coats</option>
+        <option value="Cardigans">Cardigans</option>
+        <option value="Pullovers">Pullovers</option>
+      </optgroup>
+
+      <optgroup label="Sneakers">
+        <option value="Casual Sneakers">Casual Sneakers</option>
+        <option value="High Tops">High Tops</option>
+        <option value="Low Tops">Low Tops</option>
+        <option value="Slip-Ons">Slip-Ons</option>
+      </optgroup>
+
+      <optgroup label="Formal Shoes">
+        <option value="Oxfords">Oxfords</option>
+        <option value="Brogues">Brogues</option>
+        <option value="Loafers">Loafers</option>
+        <option value="Derby Shoes">Derby Shoes</option>
+      </optgroup>
+
+      <optgroup label="Sports Shoes">
+        <option value="Running Shoes">Running Shoes</option>
+        <option value="Training Shoes">Training Shoes</option>
+        <option value="Walking Shoes">Walking Shoes</option>
+        <option value="Football Shoes">Football Shoes</option>
+      </optgroup>
+
+      <optgroup label="Sandals & Slippers">
+        <option value="Flip Flops">Flip Flops</option>
+        <option value="Slides">Slides</option>
+        <option value="Casual Sandals">Casual Sandals</option>
+        <option value="Crocs">Crocs</option>
+      </optgroup>
+    </select>
+  </div>
+</div>
+
 
           <div>
             <label className="font-semibold">Price (₹)</label>
@@ -177,7 +233,10 @@ const Add = ({ token }) => {
         <div>
           <p className="font-semibold mb-2">Available Sizes</p>
           <div className="flex flex-wrap gap-2">
-            {["S", "M", "L", "XL", "XXL"].map((size) => (
+            {(category === "Shoes"
+      ? ["6", "7", "8", "9", "10", "11"]
+      : ["S", "M", "L", "XL", "XXL"]
+    ).map((size) => (
               <button
                 type="button"
                 key={size}
