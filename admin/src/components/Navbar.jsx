@@ -19,7 +19,13 @@ const Navbar = ({ setToken }) => {
           Admin Dashboard
         </h1>
       </div>
-
+<a
+                href="https://amit-kaoi.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                AmitKaoi
+              </a>
       {/* Logout Button */}
       <button
         onClick={() => setToken("")}

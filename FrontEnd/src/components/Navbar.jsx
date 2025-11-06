@@ -157,13 +157,7 @@ const Navbar = () => {
               className="py-3 pl-6 border-b hover:bg-gray-50 transition"
               onClick={() => setVisible(false)}
             >
-              <a
-                href="https://amit-kaoi-admin.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Admin
-              </a>
+              
             </div>
           </motion.div>
         )}
