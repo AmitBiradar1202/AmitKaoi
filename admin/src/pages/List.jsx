@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { currency } from '../App';
 
-const backendUrl = "  ";
+const backendUrl = "https://amitkaoi.onrender.com";
 
 const List = ({ token }) => {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ loading state
 
   const fetchList = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${backendUrl}/api/product/list`);
       if (response.data.success) {
         setList(response.data.products);
@@ -19,6 +21,8 @@ const List = ({ token }) => {
     } catch (err) {
       console.log(err);
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,53 +55,75 @@ const List = ({ token }) => {
         All Products List
       </h2>
 
-      {/* Desktop Table Header */}
-      <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-3 px-4 bg-gray-100 rounded-t-xl font-semibold text-gray-700 text-sm uppercase tracking-wide">
-        <span className="text-center">Image</span>
-        <span>Name</span>
-        <span>Category</span>
-        <span>Price</span>
-        <span>Action</span>
-      </div>
-
-      {/* Product List */}
-      {list.map((item, idx) => (
-        <div
-          key={idx}
-          className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-3 items-center py-4 px-4 border-b border-gray-200 hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          {/* Image */}
-          <div className="flex justify-center md:justify-start">
-            <img
-              src={item.image[0]}
-              alt={item.name}
-              className="w-24 h-24 object-cover rounded-xl border border-gray-300 hover:border-gray-500 transition-all duration-300"
-            />
+      {/* ✅ Loading State */}
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-16">
+          <div className="w-10 h-10 border-4 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-500 mt-4 font-medium">Fetching products...</p>
+        </div>
+      ) : list.length === 0 ? (
+        <p className="text-center text-gray-500 mt-6 text-lg italic">
+          No products available
+        </p>
+      ) : (
+        <>
+          {/* Desktop Table Header */}
+          <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-3 px-4 bg-gray-100 rounded-t-xl font-semibold text-gray-700 text-sm uppercase tracking-wide">
+            <span className="text-center">Image</span>
+            <span>Name</span>
+            <span>Category</span>
+            <span>Price</span>
+            <span>Action</span>
           </div>
 
-          {/* Name */}
-          <p className="text-base font-semibold text-gray-800 hover:text-gray-900 transition-colors">
-            {item.name}
-          </p>
+          {/* Product List */}
+          <div className="divide-y divide-gray-100">
+            {list.map((item, idx) => (
+              <div
+                key={idx}
+                className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-3 items-center py-4 px-4 
+                           bg-white hover:bg-gray-50 rounded-xl shadow-sm hover:shadow-md 
+                           transition-all duration-300 transform hover:scale-[1.01]"
+              >
+                {/* Image */}
+                <div className="flex justify-center md:justify-start">
+                  <img
+                    src={item.image?.[0]}
+                    alt={item.name}
+                    className="w-24 h-24 object-cover rounded-xl border border-gray-300 hover:border-gray-500 transition-all duration-300"
+                  />
+                </div>
 
-          {/* Category */}
-          <p className="text-gray-500 text-sm md:text-base">{item.category}</p>
+                {/* Name */}
+                <p className="text-base font-semibold text-gray-800 hover:text-gray-900 transition-colors text-center md:text-left">
+                  {item.name}
+                </p>
 
-          {/* Price */}
-          <p className="text-lg font-bold text-gray-800">{currency} {item.price}</p>
+                {/* Category */}
+                <p className="text-gray-500 text-sm md:text-base text-center md:text-left">
+                  {item.category}
+                </p>
 
-          {/* Action */}
-          <p
-            onClick={() => removeProduct(item._id)}
-            className="text-red-500 text-xl font-bold cursor-pointer hover:text-red-700 text-center transition-colors"
-          >
-            ✖
-          </p>
-        </div>
-      ))}
+                {/* Price */}
+                <p className="text-lg font-bold text-gray-800 text-center md:text-left">
+                  {currency} {item.price}
+                </p>
 
-      {list.length === 0 && (
-        <p className="text-center text-gray-500 mt-6 text-lg italic">No products available</p>
+                {/* Action */}
+                <p
+                  onClick={() => {
+                    if (window.confirm(`Are you sure you want to remove "${item.name}"?`)) {
+                      removeProduct(item._id);
+                    }
+                  }}
+                  className="text-red-500 text-xl font-bold cursor-pointer hover:text-red-700 text-center transition-colors"
+                >
+                  ✖
+                </p>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
