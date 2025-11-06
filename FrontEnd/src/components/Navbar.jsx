@@ -53,9 +53,7 @@ const Navbar = () => {
               </NavLink>
             );
           })}
-          <div className="flex flex-col items-center gap-1 border border-gray-300 rounded-md px-2 py-[2px] hover:bg-gray-100 transition">
-            
-          </div>
+          
         </ul>
 
         {/* Right Icons */}
