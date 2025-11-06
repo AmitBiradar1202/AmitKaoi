@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { currency } from '../App';
 
-const backendUrl = "https://amitkaoi.onrender.com";
+const backendUrl = "https://amit-kaoi.onrender.com";
 
 const List = ({ token }) => {
   const [list, setList] = useState([]);

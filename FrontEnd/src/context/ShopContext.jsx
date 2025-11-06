@@ -8,7 +8,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
   const currency = '₹';
   const delivery_fee = 10;
-  const backendUrl = "https://amitkaoi.onrender.com";
+  const backendUrl = "https://amit-kaoi.onrender.com";
   // States
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');

@@ -10,7 +10,7 @@ import Order from "./pages/Order";
 import { assets } from "./assets/assets.js";
 
 
-export const backendUrl = "https://amitkaoi.onrender.com";
+export const backendUrl = "https://amit-kaoi.onrender.com";
 export const currency='₹'
 const App = () => {
 
