@@ -1,46 +1,36 @@
-import React from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ✅ import useNavigate
+import BestSeller from "../components/BestSeller";
 import Hero from "../components/Hero";
 import LatestCollection from "../components/LatestCollection";
-import BestSeller from "../components/BestSeller";
-import OurPolicy from "../components/OurPolicy";
 import NewsLetterBox from "../components/NewsLetterBox";
-import { motion } from "framer-motion";
+import OurPolicy from "../components/OurPolicy";
 
 const categories = [
   {
     name: "Men",
-    img: "https://plus.unsplash.com/premium_photo-1706806943523-e2b20a2377ac?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1112",
+    img: "https://plus.unsplash.com/premium_photo-1706806943523-e2b20a2377ac?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1112",
   },
   {
     name: "Women",
-    img: "https://plus.unsplash.com/premium_photo-1680111700123-8759aae3b5b0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdvbWVucyUyMGNsb3RoZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600 ",
+    img: "https://plus.unsplash.com/premium_photo-1680111700123-8759aae3b5b0?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=600",
   },
   {
     name: "Kids",
-    img: "https://plus.unsplash.com/premium_photo-1675183689638-a68fe7048da9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070",
-  },
-];
-
-
-const testimonials = [
-  {
-    name: "Amit Biradar",
-    text: "Loved the quality! The comfort and streetwear vibe are unmatched 🔥",
-  },
-  {
-    name: "Shoeb Manjawar",
-    text: "Perfect fit, great style — I shop here every season!",
-  },
-  {
-    name: "Arjun Malla",
-    text: "Quick delivery and amazing packaging. Totally worth it!",
+    img: "https://plus.unsplash.com/premium_photo-1675183689638-a68fe7048da9?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=2070",
   },
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryName) => {
+    // Navigate to LatestCollection page with category param
+    navigate(`/collection`);
+  };
+
   return (
     <div className="overflow-hidden">
-      {/* Hero Section */}
       <Hero />
 
       {/* Shop by Category */}
@@ -55,7 +45,8 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+              className="relative group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer"
+              onClick={() => handleCategoryClick(cat.name)} // ✅ click navigates
             >
               <img
                 src={cat.img}
@@ -76,7 +67,7 @@ const Home = () => {
       <LatestCollection />
       <BestSeller />
 
-      {/* Brand Story / Parallax Section */}
+      {/* Brand Story */}
       <section
         className="relative bg-fixed bg-center bg-cover py-24 my-20 text-center text-white"
         style={{
@@ -90,35 +81,21 @@ const Home = () => {
             Redefine Your Everyday Style
           </h2>
           <p className="text-gray-200 text-lg leading-relaxed">
-            From street to chic — explore the best in Men’s, Women’s, and Kids’
-            fashion curated for comfort and confidence.
+            From street to chic — explore the best in Men’s, Women’s, and Kids’ fashion curated for comfort and confidence.
           </p>
         </div>
       </section>
 
-      {/* Our Policy */}
       <OurPolicy />
 
       {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 py-20 text-center">
         <h2 className="text-2xl font-semibold mb-12">What Our Customers Say</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((review, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl shadow-md p-6 border border-gray-100 hover:shadow-xl transition-all"
-            >
-              <p className="text-gray-600 italic mb-4">"{review.text}"</p>
-              <h4 className="text-gray-900 font-semibold">{review.name}</h4>
-            </motion.div>
-          ))}
+          {/* Testimonial items here */}
         </div>
       </section>
 
-      {/* Newsletter */}
       <NewsLetterBox />
     </div>
   );
