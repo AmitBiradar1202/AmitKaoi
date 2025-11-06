@@ -7,7 +7,7 @@ import CartTotal from "../components/CartTotal";
 const Cart = () => {
   const { products, currency, cartItem, updateQuantity, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
-
+  const {  token } = useContext(ShopContext);
   useEffect(() => {
     let tempData = [];
     for (const items in cartItem) {
@@ -94,13 +94,19 @@ const Cart = () => {
           <div className="w-full sm:w-[450px]">
             <CartTotal />
             <div className="w-full text-end">
-              <button
-                type="button"
-                onClick={() => navigate("/place-order")}
-                className="bg-black text-white text-sm my-6 px-8 py-3 rounded-md hover:bg-gray-800 transition-all"
-              >
-                PROCEED TO CHECKOUT
-              </button>
+             <button
+  type="button"
+  onClick={() => {
+    if (!token) {
+      navigate("/login"); // redirect if not logged in
+    } else {
+      navigate("/place-order"); // proceed if logged in
+    }
+  }}
+  className="bg-black text-white text-sm my-6 px-8 py-3 rounded-md hover:bg-gray-800 transition-all"
+>
+  PROCEED TO CHECKOUT
+</button>
             </div>
           </div>
         </div>

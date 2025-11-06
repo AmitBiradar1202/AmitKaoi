@@ -19,7 +19,19 @@ import ScrollToTop from './components/ScrollToTop.jsx'
 const App = () => {
   return (
     <div className='px-4 sm:px-[5vw] md:px[7vw] lg:px[9vw]'>
-      <ToastContainer />
+      <ToastContainer
+  position="top-center"
+  autoClose={2000}
+  hideProgressBar={false}
+  newestOnTop={true}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  
+  theme="dark" // dark theme for black/white aesthetic
+/>
+
       <Navbar />
       <SearchBar />
       <ScrollToTop /> {/* Add this here */}

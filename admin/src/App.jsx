@@ -26,7 +26,18 @@ const App = () => {
   style={{ backgroundImage: `url(${assets.bg})` }}>
 
       
-       <ToastContainer />
+      <ToastContainer
+  position="top-center"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop={true}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  
+  theme="dark" // dark theme for black/white aesthetic
+/>
       {token === "" ? <Login setToken={setToken}/> : <>
         <Navbar setToken={setToken}/>
         <hr />
