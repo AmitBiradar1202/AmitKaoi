@@ -16,8 +16,8 @@ const categories = [
     img: "https://plus.unsplash.com/premium_photo-1680111700123-8759aae3b5b0?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=600",
   },
   {
-    name: "Kids",
-    img: "https://plus.unsplash.com/premium_photo-1675183689638-a68fe7048da9?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=2070",
+    name: "Shoes",
+    img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1112",
   },
 ];
 
@@ -81,7 +81,7 @@ const Home = () => {
             Redefine Your Everyday Style
           </h2>
           <p className="text-gray-200 text-lg leading-relaxed">
-            From street to chic — explore the best in Men’s, Women’s, and Kids’ fashion curated for comfort and confidence.
+            From street to chic — explore the best in Men’s, Women’s, and Shoes’ fashion curated for comfort and confidence.
           </p>
         </div>
       </section>

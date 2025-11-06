@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { assets } from '../assets/assets';
 import axios from 'axios';
-import { backendUrl } from '../App';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { backendUrl } from '../App';
+import { assets } from '../assets/assets';
 
 const Add = ({ token }) => {
   const [image1, setImage1] = useState(false);
@@ -112,7 +112,7 @@ const Add = ({ token }) => {
             <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
               <option value="Men">Men</option>
               <option value="Women">Women</option>
-              <option value="Kids">Kids</option>
+              <option value="Shoes">Shoes</option>
             </select>
           </div>
 

@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
-import { ShopContext } from "../context/ShopContext";
+import { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
-import Title from "../components/Title";
 import ProductItem from '../components/ProductItem';
+import Title from "../components/Title";
+import { ShopContext } from "../context/ShopContext";
 
 const Collection = () => {
   const { products, search, showSearch } = useContext(ShopContext);
@@ -74,7 +74,7 @@ const Collection = () => {
         <div className={`border border-gray-300 rounded-lg p-4 mt-4 bg-white shadow-sm ${showFilter ? "block" : "hidden sm:block"}`}>
           <p className="mb-3 font-medium text-gray-700">CATEGORY</p>
           <div className="flex flex-col gap-2 text-gray-600 text-sm">
-            {["Men", "Women", "Kids"].map(cat => (
+            {["Men", "Women", "Shoes"].map(cat => (
               <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-pink-600 transition-colors">
                 <input className="w-4 h-4 accent-pink-400" type="checkbox" value={cat} onChange={toggleCategory} />
                 {cat.toUpperCase()}
