@@ -12,7 +12,7 @@ const Orders = () => {
       if (!token) return;
 
       const response = await axios.post(
-        `${backendUrl}/api/order/userorders`,
+        `https://amitkaoi.vercel.app/api/order/userorders`,
         {},
         { headers: { token } }
       );
