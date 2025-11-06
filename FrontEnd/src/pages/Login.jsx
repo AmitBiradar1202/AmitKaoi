@@ -142,7 +142,7 @@ const Login = () => {
 
         {/* Google Login Button */}
         <a
-          href={`${backendUrl}/api/user/google`}
+          href={`https://amit-kaoi.vercel.app/api/user/google`}
           className="flex justify-center items-center w-full bg-red-500 text-white font-medium px-4 py-2 rounded-xl shadow-md hover:bg-red-600 transition duration-300"
         >
           <img
