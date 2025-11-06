@@ -55,9 +55,7 @@ const Navbar = () => {
           })}
           <div className="flex flex-col items-center gap-1 border border-gray-300 rounded-md px-2 py-[2px] hover:bg-gray-100 transition">
             <p>
-              <a href="https://amit-kaoi-admin.vercel.app/" target="_blank" rel="noreferrer">
-                Admin
-              </a>
+              
             </p>
           </div>
         </ul>
