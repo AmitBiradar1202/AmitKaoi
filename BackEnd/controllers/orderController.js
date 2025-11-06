@@ -16,6 +16,11 @@ const placeOrder = async (req, res) => {
     try {
         const { userId, items, amount, address } = req.body;
 
+        // Generate human-readable orderId
+        const orderCount = await orderModel.countDocuments({});
+        const orderNumber = String(orderCount + 1).padStart(3, '0'); // e.g., 001, 002
+        const humanOrderId = `ORD${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${orderNumber}`;
+
         const orderData = {
             userId,
             items,
@@ -23,26 +28,28 @@ const placeOrder = async (req, res) => {
             amount,
             paymentMethod: "COD",
             payment: false,
-            date: Date.now()
-        }
+            date: Date.now(),
+            orderId: humanOrderId // <-- save this
+        };
+
         const newOrder = new orderModel(orderData);
-        await newOrder.save()
+        await newOrder.save();
         await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
         res.json({
             success: true,
-            message: "Order Placed"
-
-        })
+            message: "Order Placed",
+            orderId: humanOrderId // <-- send to frontend if needed
+        });
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.json({
             success: false,
             message: err.message
-
-        })
+        });
     }
-}
+};
+
 
 //placing order using stripe
 const placeOrderStripe = async (req, res) => {
@@ -214,6 +221,29 @@ const verifyRazorpay = async (req, res) => {
     }
 };
 
+// Delete order - only admin
+const deleteOrder = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+
+    // Check if order exists
+    const order = await orderModel.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    await orderModel.findByIdAndDelete(orderId);
+
+    res.json({
+      success: true,
+      message: "Order deleted successfully",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 
 // all user data for admin pannel
 const allOrders = async (req, res) => {
@@ -276,5 +306,5 @@ const updateStatus = async (req, res) => {
     }
 }
 
-export { allOrders, placeOrder, placeOrderRazorpay, placeOrderStripe, updateStatus, userOrder, verifyRazorpay, verifyStripe };
+export { allOrders, deleteOrder, placeOrder, placeOrderRazorpay, placeOrderStripe, updateStatus, userOrder, verifyRazorpay, verifyStripe };
 

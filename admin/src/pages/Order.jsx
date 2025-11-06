@@ -1,24 +1,20 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { currency } from '../App';
 import { assets } from '../assets/assets';
 const backendUrl = "https://amitkaoi.onrender.com";
 
 const Order = ({ token }) => {
   const [orders, setOrders] = useState([]);
-  
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null); // For image modal
+
   const fetchAllOrders = async () => {
     if (!token) return;
     try {
       const response = await axios.post(`${backendUrl}/api/order/list`, {}, { headers: { token } });
-      if (response.data.success) {
-        // Hide completed transactions
-        const filteredOrders = response.data.orders.filter(order => !order.payment);
-        setOrders(filteredOrders);
-      } else {
-        toast.error("Something went wrong");
-      }
+      if (response.data.success) setOrders(response.data.orders);
+      else toast.error("Something went wrong");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -27,27 +23,31 @@ const Order = ({ token }) => {
 
   const statusHandler = async (e, orderId) => {
     try {
-      const response = await axios.post(
-        `${backendUrl}/api/order/status`,
-        { orderId, status: e.target.value },
-        { headers: { token } }
-      );
-
+      const response = await axios.post(`${backendUrl}/api/order/status`, { orderId, status: e.target.value }, { headers: { token } });
       if (response.data?.success) {
         toast.success("Order status updated");
         await fetchAllOrders();
-      } else {
-        toast.error(response.data?.message || "Something went wrong");
-      }
+      } else toast.error(response.data?.message || "Something went wrong");
     } catch (err) {
       console.log(err);
       toast.error(err.response?.data?.message || err.message);
     }
   };
 
-  useEffect(() => {
-    fetchAllOrders();
-  }, [token]);
+  const deleteOrder = async (orderId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/order/${orderId}`, { headers: { token } });
+      if (response.data?.success) {
+        toast.success("Order deleted successfully");
+        await fetchAllOrders();
+      } else toast.error(response.data?.message || "Something went wrong");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response?.data?.message || err.message);
+    }
+  };
+
+  useEffect(() => { fetchAllOrders(); }, [token]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -60,43 +60,71 @@ const Order = ({ token }) => {
     }
   }
 
+ const filteredOrders = orders.filter(order => {
+  const query = searchQuery.toLowerCase();
+  const fullName = `${order.address.firstName} ${order.address.lastName}`.toLowerCase();
   return (
-    <div className="container mx-auto p-6">
-      <h3 className="text-2xl font-bold mb-8 text-center">Orders Dashboard</h3>
+    order._id.toLowerCase().includes(query) ||
+    order.address.firstName.toLowerCase().includes(query) ||
+    order.address.lastName.toLowerCase().includes(query) ||
+    fullName.includes(query) ||
+    order.items.some(item => item.name.toLowerCase().includes(query))
+  );
+});
+
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+  }
+
+  return (
+    <div className="container mx-auto p-4 md:p-6">
+      <h2 className="text-3xl font-bold mb-6 text-center">Orders Dashboard</h2>
+
+      {/* Search Bar */}
+      <div className="mb-6 flex justify-center">
+        <input
+          type="text"
+          placeholder="Search by Product Name, Order ID, or User Name..."
+          className="border p-2 rounded w-full max-w-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
       <div className="space-y-6">
-        {orders.length === 0 && <p className="text-center text-gray-500">No pending transactions!</p>}
+        {filteredOrders.length === 0 && <p className="text-center text-gray-500">No orders found!</p>}
 
-        {orders.map((order, idx) => (
-          <div key={idx} className="border rounded-lg p-6 shadow-lg bg-white hover:shadow-2xl transition-shadow duration-300">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+        {filteredOrders.map((order, idx) => (
+          <div key={idx} className="border rounded-lg shadow-lg bg-white p-6 hover:shadow-2xl transition-shadow duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-6 items-start">
 
-              {/* Column 1: Image and Items */}
-              <div className="flex flex-col space-y-3">
-                <img className="w-16 h-16 mb-3" src={assets.parcel_icon} alt="Parcel" />
-                <div className="space-y-3">
-                  {order.items.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4 py-2 border-b border-gray-200">
-                      {/* Product Image */}
-                      <img
-                        src={item.image && item.image[0] ? item.image[0] : assets.upload_area}
-                        alt={item.name}
-                        className="w-24 h-24 object-cover rounded-lg"
-                      />
-                      {/* Product Info */}
-                      <div>
-                        <p className="font-semibold text-lg">{item.name}</p>
-                        <p><span className="font-bold">Qty: </span> {Number(item.Quantity)}</p>
-                        <p><span className="font-bold">Size: </span> {item.size}</p>
-                        {item.color && <p><span className="font-bold">Color: </span> {item.color}</p>}
-                        <p className="text-pink-600 font-semibold">{currency}{item.price}</p>
-                      </div>
+              {/* Column 1: Items */}
+              <div className="flex flex-col space-y-4 md:col-span-2">
+                {order.items.map((item, idx) => (
+                  <div key={idx} className="border rounded-lg shadow-sm bg-gray-50 p-4 flex flex-col items-center">
+                    <img 
+                      src={item.image?.[0] || assets.upload_area} 
+                      alt={item.name} 
+                      className="w-full h-48 object-contain rounded-lg mb-3 cursor-pointer hover:scale-105 transition"
+                      onClick={() => setSelectedImage(item.image?.[0] || assets.upload_area)} // Only image
+                    />
+                    <div className="text-center space-y-1">
+
+                      
+                      <p className="font-semibold text-lg">{item.name}</p>
+
+                      <p className="text-sm md:text-base"><span className="font-semibold">Qty:</span> {Number(item.Quantity)}</p>
+                      <p className="text-sm md:text-base"><span className="font-semibold">Size:</span> {item.size}</p>
+                      {item.color && <p className="text-sm md:text-base"><span className="font-semibold">Color:</span> {item.color}</p>}
+                      <p className="text-pink-600 font-semibold text-lg">{formatCurrency(item.price)}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
 
               {/* Column 2: Customer Info */}
-              <div className="text-sm md:text-base space-y-2">
+              <div className="text-sm md:text-base space-y-2 md:col-span-1">
                 <p className="font-semibold">{order.address.firstName} {order.address.lastName}</p>
                 <p>{order.address.street}</p>
                 <p>{order.address.city}, {order.address.state}, {order.address.country} - {order.address.zipCode}</p>
@@ -105,25 +133,27 @@ const Order = ({ token }) => {
               </div>
 
               {/* Column 3: Order Details */}
-              <div className="text-sm md:text-base space-y-2">
-                <p><span className="font-semibold">Items:</span> {order.items.length}</p>
-                <p><span className="font-semibold">Payment Method:</span> {order.paymentMethod}</p>
-                <p><span className="font-semibold">Payment:</span> {order.payment ? 'Done' : 'Pending'}</p>
-                <p><span className="font-semibold">Order Date:</span> {new Date(order.date).toLocaleDateString()}</p>
-                <p>
-                  <span className={`px-2 py-1 rounded-full font-semibold ${getStatusColor(order.status)}`}>
-                    {order.status}
-                  </span>
-                </p>
-              </div>
+<div className="text-sm md:text-base space-y-2 md:col-span-1">
+  <p><span className="font-semibold">Order ID:</span> {order.orderId || order._id.slice(-6).toUpperCase()}</p>
+  <p><span className="font-semibold">Items:</span> {order.items.length}</p>
+  <p><span className="font-semibold">Payment Method:</span> {order.paymentMethod}</p>
+  <p><span className="font-semibold">Payment:</span> {order.payment ? 'Done' : 'Pending'}</p>
+  <p><span className="font-semibold">Order Date:</span> {new Date(order.date).toLocaleDateString()}</p>
+  <p>
+    <span className={`px-2 py-1 rounded-full font-semibold ${getStatusColor(order.status)}`}>
+      {order.status}
+    </span>
+  </p>
+</div>
+
 
               {/* Column 4: Amount */}
-              <div className="text-lg md:text-xl font-bold text-green-600 flex items-center justify-start md:justify-center">
-                {currency}{order.amount}
+              <div className="text-lg md:text-xl font-bold text-green-600 flex items-center justify-start md:justify-center md:col-span-1">
+                {formatCurrency(order.amount)}
               </div>
 
               {/* Column 5: Status Select */}
-              <div className="flex items-center">
+              <div className="flex items-center md:col-span-1">
                 <select
                   onChange={(e)=>statusHandler(e, order._id)}
                   value={order.status}
@@ -137,10 +167,49 @@ const Order = ({ token }) => {
                 </select>
               </div>
 
+              {/* Column 6: Delete */}
+             {/* Column 6: Delete */}
+<div className="flex items-center justify-center md:col-span-1">
+  <button
+    onClick={() => {
+      if (window.confirm("Are you sure you want to delete this order?")) {
+        deleteOrder(order._id);
+      }
+    }}
+    className={`px-4 py-2 rounded text-white transition ${
+      order.status === "Delivered"
+        ? "bg-red-500 hover:bg-red-600"
+        : "bg-gray-400 cursor-not-allowed"
+    }`}
+    disabled={order.status !== "Delivered"} // Only allow for Delivered
+  >
+    Delete
+  </button>
+</div>
+
+
             </div>
           </div>
         ))}
       </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+          <button
+            className="absolute top-4 right-4 text-white text-2xl font-bold z-50"
+            onClick={() => setSelectedImage(null)}
+          >
+            ✕
+          </button>
+          <img
+            src={selectedImage}
+            alt="Selected"
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+          />
+        </div>
+      )}
+
     </div>
   );
 }

@@ -18,18 +18,21 @@ const Orders = () => {
       );
 
       if (response.data.success) {
-        let allOrdersItem = [];
-        response.data.orders.forEach((order) => {
-          order.items.forEach((item) => {
-            item.status = order.status;
-            item.payment = order.payment;
-            item.paymentMethod = order.paymentMethod;
-            item.date = order.date;
-            allOrdersItem.push(item);
-          });
-        });
-        setOrderData(allOrdersItem.reverse());
-      }
+  let allOrdersItem = [];
+  response.data.orders.forEach((order) => {
+    const displayOrderId = order.orderId || order._id.slice(-6).toUpperCase(); // fallback
+    order.items.forEach((item) => {
+      item.status = order.status;
+      item.payment = order.payment;
+      item.paymentMethod = order.paymentMethod;
+      item.date = order.date;
+      item.displayOrderId = displayOrderId; // new field
+      allOrdersItem.push(item);
+    });
+  });
+  setOrderData(allOrdersItem.reverse());
+}
+
     } catch (err) {
       console.error(err);
     }
@@ -75,7 +78,12 @@ const Orders = () => {
               className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-5"
             >
               {/* Product Info */}
+              <p>
+    Order ID:{" "}
+    <span className="text-gray-700 font-semibold">{item.displayOrderId}</span>
+  </p>
               <div className="flex items-start gap-5 text-gray-700 w-full md:w-3/4">
+             
                 <img
                   src={item.image[0]}
                   alt={item.name}

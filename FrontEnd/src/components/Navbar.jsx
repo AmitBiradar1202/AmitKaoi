@@ -1,8 +1,8 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
@@ -55,7 +55,7 @@ const Navbar = () => {
           })}
           <div className="flex flex-col items-center gap-1 border border-gray-300 rounded-md px-2 py-[2px] hover:bg-gray-100 transition">
             <p>
-              <a href="https://AmitKaoi-admin.vercel.app/" target="_blank" rel="noreferrer">
+              <a href="https://amit-kaoi-admin.vercel.app/" target="_blank" rel="noreferrer">
                 Admin
               </a>
             </p>
@@ -158,7 +158,7 @@ const Navbar = () => {
               onClick={() => setVisible(false)}
             >
               <a
-                href="https://AmitKaoi-admin.vercel.app/"
+                href="https://amit-kaoi-admin.vercel.app/"
                 target="_blank"
                 rel="noreferrer"
               >
