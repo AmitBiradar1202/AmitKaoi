@@ -23,7 +23,7 @@ connectCloudinary();
 // Middlewares
 app.use(express.json());
 app.use(cors({
-  origin: ["https://amitkaoi.vercel.app", "http://localhost:5173"], // frontend URLs
+  origin: ["https://amit-kaoi.vercel.app", "http://localhost:5173"], // frontend URLs
   credentials: true,
 }));
 
