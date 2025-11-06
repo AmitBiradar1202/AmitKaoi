@@ -31,7 +31,7 @@ app.use(passport.initialize());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://amitkaoi.onrender.com/api/user/google/callback", // backend URL + route
+  callbackURL: "https://amit-kaoi.vercel.app/api/user/google/callback", // backend URL + route
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await userModel.findOne({ googleId: profile.id });
