@@ -6,7 +6,7 @@ export const ShopContext = createContext();
 //import { products } from '../assets/assets.js';
 
 const ShopContextProvider = (props) => {
-  const currency = '$';
+  const currency = '₹';
   const delivery_fee = 10;
   const backendUrl = "https://amitkaoi.onrender.com";
   // States

@@ -5,6 +5,10 @@ import order_icon from './order_icon.png'
 import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.svg'
 import Admin from './Admin.svg'
+
+import bg from './bg.png';
+
+
 export const assets = {
     logo,
     logo1,
@@ -12,6 +16,6 @@ export const assets = {
     order_icon,
     upload_area,
     parcel_icon,
-    Admin
+    Admin,
+    bg
 }
-

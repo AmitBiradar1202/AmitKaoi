@@ -7,8 +7,11 @@ import Sidebar from "./components/Sidebar";
 import Add from "./pages/Add";
 import List from "./pages/List";
 import Order from "./pages/Order";
+import { assets } from "./assets/assets.js";
+
+
 export const backendUrl = "https://amitkaoi.onrender.com";
-export const currency='$'
+export const currency='₹'
 const App = () => {
 
   const [token, setToken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):"")
@@ -19,7 +22,10 @@ const App = () => {
   },[token])
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="min-h-screen bg-gray-50 bg-cover bg-center"
+  style={{ backgroundImage: `url(${assets.bg})` }}>
+
+      
        <ToastContainer />
       {token === "" ? <Login setToken={setToken}/> : <>
         <Navbar setToken={setToken}/>

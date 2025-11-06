@@ -79,18 +79,23 @@ const Order = ({ token }) => {
 
   return (
     <div className="container mx-auto p-4 md:p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">Orders Dashboard</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-white tracking-tight drop-shadow-md">
+  Orders Dashboard
+</h2>
 
-      {/* Search Bar */}
-      <div className="mb-6 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search by Product Name, Order ID, or User Name..."
-          className="border p-2 rounded w-full max-w-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+     {/* Search Bar */}
+<div className="mb-6 flex justify-center">
+  <input
+    type="text"
+    placeholder="Search by Product Name, Order ID, or User Name..."
+    className="w-full max-w-md p-3 rounded-lg bg-white border border-gray-300 
+               text-gray-800 shadow-sm focus:outline-none focus:ring-2 
+               focus:ring-pink-500 focus:border-pink-500 transition duration-200"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</div>
+
 
       <div className="space-y-6">
         {filteredOrders.length === 0 && <p className="text-center text-gray-500">No orders found!</p>}

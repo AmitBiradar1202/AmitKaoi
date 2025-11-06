@@ -24,7 +24,11 @@ const List = ({ token }) => {
 
   const removeProduct = async (id) => {
     try {
-      const response = await axios.post(`${backendUrl}/api/product/remove`, { id }, { headers: { token } });
+      const response = await axios.post(
+        `${backendUrl}/api/product/remove`,
+        { id },
+        { headers: { token } }
+      );
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchList();
@@ -42,11 +46,13 @@ const List = ({ token }) => {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">All Products List</h2>
-      
-      {/* Desktop Table */}
-      <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-2 px-4 bg-gray-100 rounded-t-lg font-semibold">
+    <div className="max-w-6xl mx-auto p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 tracking-wide">
+        All Products List
+      </h2>
+
+      {/* Desktop Table Header */}
+      <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-3 px-4 bg-gray-100 rounded-t-xl font-semibold text-gray-700 text-sm uppercase tracking-wide">
         <span className="text-center">Image</span>
         <span>Name</span>
         <span>Category</span>
@@ -58,40 +64,40 @@ const List = ({ token }) => {
       {list.map((item, idx) => (
         <div
           key={idx}
-          className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-2 items-center py-4 px-4 border-b hover:bg-gray-50 rounded-md md:rounded-none transition duration-200 shadow-sm md:shadow-none"
+          className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-3 items-center py-4 px-4 border-b border-gray-200 hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
         >
           {/* Image */}
           <div className="flex justify-center md:justify-start">
             <img
               src={item.image[0]}
               alt={item.name}
-              className="w-20 h-20 object-cover rounded-md"
+              className="w-24 h-24 object-cover rounded-xl border border-gray-300 hover:border-gray-500 transition-all duration-300"
             />
           </div>
 
           {/* Name */}
-          <p className="text-sm md:text-base font-medium">{item.name}</p>
+          <p className="text-base font-semibold text-gray-800 hover:text-gray-900 transition-colors">
+            {item.name}
+          </p>
 
           {/* Category */}
-          <p className="text-sm md:text-base">{item.category}</p>
+          <p className="text-gray-500 text-sm md:text-base">{item.category}</p>
 
           {/* Price */}
-          <p className="text-sm md:text-base font-semibold">
-            {currency} {item.price}
-          </p>
+          <p className="text-lg font-bold text-gray-800">{currency} {item.price}</p>
 
           {/* Action */}
           <p
             onClick={() => removeProduct(item._id)}
-            className="text-red-500 text-lg font-bold cursor-pointer text-right md:text-center hover:text-red-700 transition"
+            className="text-red-500 text-xl font-bold cursor-pointer hover:text-red-700 text-center transition-colors"
           >
-            X
+            ✖
           </p>
         </div>
       ))}
 
       {list.length === 0 && (
-        <p className="text-center text-gray-500 mt-6">No products available</p>
+        <p className="text-center text-gray-500 mt-6 text-lg italic">No products available</p>
       )}
     </div>
   );
