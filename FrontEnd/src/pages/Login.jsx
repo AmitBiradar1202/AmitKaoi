@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       if (currentState === "Sign Up") {
-        const response = await axios.post(`backendUrl/api/user/register`, {
+        const response = await axios.post(`https://amitkaoi.onrender.com/api/user/register`, {
           name,
           email,
           password,
@@ -33,7 +33,7 @@ const Login = () => {
           toast.error(response.data.message);
         }
       } else {
-        const response = await axios.post(`backendUrl/api/user/login`, {
+        const response = await axios.post(`https://amitkaoi.onrender.com/api/user/login`, {
           email,
           password,
         });
@@ -142,7 +142,7 @@ const Login = () => {
 
         {/* Google Login Button */}
         <a
-          href={`backendUrl/api/user/google`}
+          href={`${backendUrl}/api/user/google`}
           className="flex justify-center items-center w-full bg-red-500 text-white font-medium px-4 py-2 rounded-xl shadow-md hover:bg-red-600 transition duration-300"
         >
           <img
