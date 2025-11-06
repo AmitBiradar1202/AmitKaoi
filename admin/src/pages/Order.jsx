@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
-const backendUrl = "https://amitkaoi.vercel.app/";
+const backendUrl = "https://amitkaoi.onrender.com";
 
 const Order = ({ token }) => {
   const [orders, setOrders] = useState([]);
