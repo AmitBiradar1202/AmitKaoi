@@ -6,9 +6,9 @@ import NewsLetterBox from "../components/NewsLetterBox";
 const About = () => {
   return (
     <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen text-gray-700">
-      {/* ======= ABOUT US HEADER ======= */}
+      {/* ======= ABOUT AMITKAOI HEADER ======= */}
       <div className="text-3xl md:text-4xl font-bold text-center pt-10 border-t border-gray-200">
-        <Title text1={"ABOUT "} text2={"US"} />
+        <Title text1={"ABOUT "} text2={"AMITKAOI"} />
       </div>
 
       {/* ======= MAIN ABOUT SECTION ======= */}
@@ -16,14 +16,14 @@ const About = () => {
         <div className="md:w-1/2">
           <img
             src={assets.about_img}
-            alt="About Us"
+            alt="About AmitKaoi"
             className="w-full max-w-[500px] rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
           />
         </div>
 
         <div className="md:w-1/2 flex flex-col gap-6 text-base leading-relaxed">
           <p>
-            <span className="font-semibold text-gray-900">Forever</span> was
+            <span className="font-semibold text-gray-900">AmitKaoi</span> was
             born out of a passion for innovation and a desire to revolutionize
             the way people shop online. Our journey began with a simple idea —
             to provide a platform where customers can easily discover, explore,
@@ -42,7 +42,7 @@ const About = () => {
           <h2 className="text-xl font-semibold text-gray-900 mt-2">Our Mission</h2>
           <p>
             Our mission at{" "}
-            <span className="font-semibold text-gray-900">Forever</span> is to
+            <span className="font-semibold text-gray-900">AmitKaoi</span> is to
             empower customers with choice, convenience, and confidence. We’re
             dedicated to providing a seamless shopping experience that exceeds
             expectations — from browsing and ordering to delivery and beyond.
@@ -50,9 +50,9 @@ const About = () => {
         </div>
       </div>
 
-      {/* ======= WHY CHOOSE US ======= */}
+      {/* ======= WHY CHOOSE AMITKAOI ======= */}
       <div className="text-3xl md:text-4xl text-center font-bold text-gray-800 py-6">
-        <Title text1={"WHY "} text2={"CHOOSE US"} />
+        <Title text1={"WHY "} text2={"CHOOSE AMITKAOI"} />
       </div>
 
       <div className="flex flex-col md:flex-row justify-center gap-8 px-6 md:px-16 mb-20">
