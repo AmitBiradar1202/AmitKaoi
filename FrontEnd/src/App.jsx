@@ -14,7 +14,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { ToastContainer } from 'react-toastify';
 import SearchBar from './components/SearchBar'
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop.jsx'
 
 const App = () => {
   return (
