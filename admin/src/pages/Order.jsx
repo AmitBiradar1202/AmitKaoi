@@ -36,7 +36,7 @@ const Order = ({ token }) => {
 
   const deleteOrder = async (orderId) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/order/${orderId}`, { headers: { token } });
+      const response = await axios.delete(`backendUrl/api/order/${orderId}`, { headers: { token } });
       if (response.data?.success) {
         toast.success("Order deleted successfully");
         await fetchAllOrders();

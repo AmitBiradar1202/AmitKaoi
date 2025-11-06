@@ -25,11 +25,11 @@ const Contact = () => {
           <div>
             <p className='font-semibold text-xl text-gray-700'>Our Store</p>
             <p className='text-gray-500'>
-              1202, 12th Floor, BD Kadam SRA Bld, Veera Desai Rd,<br />
+             <br />
               Near Oberoi Spring, Andheri West, Mumbai 400058, India
             </p>
             <p className='text-gray-500 mt-2'>
-              Tel: 07718003418 <br />
+              Tel: 04646545556 <br />
               Email: amitbiradar1202@gmail.com
             </p>
           </div>
