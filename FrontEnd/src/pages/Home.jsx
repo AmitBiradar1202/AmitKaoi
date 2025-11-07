@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
       <Hero />
-
+<LatestCollection />
       {/* Shop by Category */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 py-20">
         <h2 className="text-2xl font-semibold mb-10 text-center">
@@ -64,7 +64,7 @@ const Home = () => {
       </section>
 
       {/* Latest & Best Sellers */}
-      <LatestCollection />
+      
       <BestSeller />
 
       {/* Brand Story */}
