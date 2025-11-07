@@ -78,7 +78,11 @@ import Hero2 from './Hero2.png'
 import Hero3 from './Hero3.png'
 import Hero4 from './Hero4.png'
 //some my favourite
-
+import video1 from './video1.mp4'
+import video2 from './video2.mp4'
+import video3 from './video3.mp4'
+import video4 from './video4.mp4'
+import video5 from './video5.mp4'
 import ForPaymentPage from './ForPaymentPage.svg'
 
 export const assets = {
@@ -92,9 +96,14 @@ export const assets = {
     search_icon,
     star_dull_icon,
     star_icon,
+    video2,
     bin_icon,
     support_img,
     menu_icon,
+    video1,
+    video3,
+    video4,
+    video5,
     about_img,
     contact_img,
     razorpay_logo,

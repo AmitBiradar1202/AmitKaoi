@@ -1,6 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Nanum+Gothic+Coding&family=Outfit:wght@100..900&family=Pacifico&family=Prata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Prata&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --brand-black: #e3e3e3;
+  --brand-white: #ffffff;
+  --muted: #9ca3af;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--brand-black);
+  color: var(--brand-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* utility for huge headings */
+.huge-title {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.02em;
+}
 
 @tailwind base;
 @tailwind components;
@@ -28,3 +49,5 @@
     }
   }
   
+
+  /* index.css - import this in index.jsx or App.jsx */

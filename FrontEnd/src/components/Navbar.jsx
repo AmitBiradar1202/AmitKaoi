@@ -137,16 +137,29 @@ const Navbar = () => {
               <img src={assets.dropdown_icon} alt="" className="h-4 rotate-180" />
               <p className="font-medium">Back</p>
             </div>
-            {["HOME", "COLLECTION", "ABOUT", "CONTACT"].map((item, i) => (
-              <NavLink
-                key={i}
-                to={["/", "/collection", "/about", "/contact"][i]}
-                className="py-3 pl-6 border-b hover:bg-gray-50 transition"
-                onClick={() => setVisible(false)}
-              >
-                {item}
-              </NavLink>
-            ))}
+         {/* Nav Links */}
+{/* Nav Links */}
+<ul className="hidden sm:flex gap-8 text-sm font-bold uppercase">
+  {["/", "/collection", "/about", "/contact"].map((path, idx) => {
+    const names = ["HOME", "COLLECTION", "ABOUT", "CONTACT"];
+    return (
+      <NavLink
+        key={idx}
+        to={path}
+        className={({ isActive }) =>
+          `relative flex flex-col items-center gap-1 transition-all group ${
+            isActive ? "text-gray-100" : "text-gray-400 hover:text-gray-200"
+          }`
+        }
+      >
+        <p className="tracking-widest text-lg">{names[idx]}</p>
+        {/* Hover underline effect */}
+        <span className="absolute bottom-[-4px] left-1/2 w-0 h-[2px] bg-gray-100 rounded-full group-hover:w-1/2 transition-all duration-300"></span>
+      </NavLink>
+    );
+  })}
+</ul>
+
             <div
               className="py-3 pl-6 border-b hover:bg-gray-50 transition"
               onClick={() => setVisible(false)}

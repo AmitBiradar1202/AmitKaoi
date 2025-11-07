@@ -86,7 +86,7 @@ const Product = () => {
             </p>
             <p className="text-gray-500 line-through text-sm mt-1">
               {currency}
-              {oldPrice.toFixed(0)}
+              {productData.price + 50}
             </p>
           </div>
 
