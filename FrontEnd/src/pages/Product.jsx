@@ -29,6 +29,10 @@ const Product = () => {
       </div>
     );
 
+  // 🔹 Generate random "old price" (10–40% higher)
+  const randomIncrease = Math.floor(Math.random() * 30) + 10;
+  const oldPrice = productData.price + (productData.price * randomIncrease) / 100;
+
   return (
     <div className="border-t-2 pt-10 transition-opacity ease-in-out duration-500 opacity-100">
       {/* --- Product Display --- */}
@@ -72,14 +76,19 @@ const Product = () => {
               <img key={i} src={assets.star_icon} alt="star" className="w-4" />
             ))}
             <img src={assets.star_dull_icon} alt="star" className="w-4" />
-           
           </div>
 
-          {/* Price */}
-          <p className="mt-4 text-3xl font-semibold text-gray-900">
-            {currency}
-            {productData.price}
-          </p>
+          {/* Price Section */}
+          <div className="mt-4">
+            <p className="text-3xl font-semibold text-gray-900">
+              {currency}
+              {productData.price}
+            </p>
+            <p className="text-gray-500 line-through text-sm mt-1">
+              {currency}
+              {oldPrice.toFixed(0)}
+            </p>
+          </div>
 
           {/* Description */}
           <p className="mt-4 text-gray-600 leading-relaxed md:w-4/5">
@@ -95,9 +104,10 @@ const Product = () => {
                   key={idx}
                   onClick={() => setSize(item)}
                   className={`border rounded-full py-2 px-5 text-sm font-medium transition-all 
-                    ${item === size
-                      ? "bg-black text-white border-black"
-                      : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                    ${
+                      item === size
+                        ? "bg-black text-white border-black"
+                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
                     }`}
                 >
                   {item}
@@ -129,7 +139,6 @@ const Product = () => {
       <div className="mt-20 bg-gray-50 rounded-xl shadow-sm border p-6">
         <div className="flex border-b mb-4">
           <b className="border-b-2 border-black px-5 py-3 text-sm">Description</b>
-          
         </div>
         <div className="text-gray-600 leading-relaxed text-sm">
           An e-commerce website is an online platform that facilitates the buying and selling of products
