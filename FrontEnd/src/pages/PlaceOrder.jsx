@@ -10,7 +10,7 @@ const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
   const { navigate, token, cartItem, setCartItem, delivery_fee, getCartAmount, products } = useContext(ShopContext);
 
-  const backendUrl = "https://amit-kaoi.onrender.com";
+  const backendUrl = "https://amitkaoi.onrender.com";
 
   const [formData, setFormData] = useState({
     firstName: "",
