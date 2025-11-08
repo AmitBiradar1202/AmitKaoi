@@ -1,6 +1,6 @@
-@import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Nanum+Gothic+Coding&family=Outfit:wght@100..900&family=Pacifico&family=Prata&display=swap');
+@import "tailwindcss";
 
 * {
     font-family: "Outfit", sans-serif;
@@ -16,4 +16,4 @@
 }
 
 
-  
+ 

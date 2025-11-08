@@ -44,6 +44,19 @@ const Sidebar = () => {
           <img src={assets.order_icon} alt="orders" className="w-6 h-6 mx-auto md:mx-0" />
           <span className="hidden md:block font-medium">Orders</span>
         </NavLink>
+
+        {/* ✅ Coupons */}
+        <NavLink
+          to="/coupons"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-200 ${
+              isActive ? 'bg-black text-white' : 'text-gray-700 hover:bg-gray-100'
+            }`
+          }
+        >
+          <img src={assets.discount_icon || assets.add_icon} alt="coupons" className="w-6 h-6 mx-auto md:mx-0" />
+          <span className="hidden md:block font-medium">Coupons</span>
+        </NavLink>
       </div>
     </div>
   );

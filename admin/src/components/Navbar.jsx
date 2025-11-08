@@ -12,11 +12,14 @@ const Navbar = ({ setToken }) => {
     >
       {/* Left: Logo + Title */}
       <div className="flex items-center gap-3">
-        <img
-          src={assets.logo1}
-          alt="Logo"
-          className="w-12 h-12 object-contain rounded-xl hover:scale-105 transition-transform duration-300"
-        />
+       
+        <a href="https://amit-kaoi-admin.vercel.app/" target="_blank" rel="noopener noreferrer">
+  <img
+    src={assets.logo} 
+    alt="Logo"
+    className=" cursor-pointer w-12 h-12 object-contain rounded-xl hover:scale-105 transition-transform duration-300"
+  />
+</a>
         <div className="flex flex-col leading-tight">
           <h1 className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent tracking-tight">
             Admin Dashboard
@@ -28,7 +31,7 @@ const Navbar = ({ setToken }) => {
       </div>
 
       {/* Center: Link to main site */}
-      <a
+      <a  
         href="https://amit-kaoi.vercel.app/"
         target="_blank"
         rel="noreferrer"

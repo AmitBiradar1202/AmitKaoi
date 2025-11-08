@@ -11,6 +11,7 @@ import passport from "passport";
 import session from "express-session";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import userModel from "./models/userModel.js";
+import couponRouter from "./routes/couponRoute.js";
 
 //app config
 const app = express();
@@ -65,6 +66,7 @@ app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/order',orderRouter);
+app.use("/api/coupon", couponRouter);
 
 //api testing and connection with port 
 app.get('/',(req,res)=>{

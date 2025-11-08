@@ -5,9 +5,9 @@ import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, currency, cartItem, updateQuantity, navigate } = useContext(ShopContext);
+  const { products, currency, cartItem, updateQuantity, navigate, token } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
-  const {  token } = useContext(ShopContext);
+
   useEffect(() => {
     let tempData = [];
     for (const items in cartItem) {
@@ -25,13 +25,15 @@ const Cart = () => {
   }, [cartItem]);
 
   return (
-    <div className="border-t pt-14 min-h-[80vh]">
-      <div className="text-2xl mb-6">
+    <div className="border-t pt-14 min-h-[80vh] bg-gradient-to-b from-gray-50 to-white">
+      {/* Title */}
+      <div className="text-3xl font-semibold text-center mb-10">
         <Title text1="YOUR" text2="CART" />
+        <div className="w-20 h-1 bg-black mx-auto rounded-full mt-2"></div>
       </div>
 
       {/* CART ITEMS */}
-      <div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-8">
         {cartData.length > 0 ? (
           cartData.map((item, idx) => {
             const productData = products.find((product) => product._id === item._id);
@@ -40,73 +42,84 @@ const Cart = () => {
             return (
               <div
                 key={idx}
-                className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
+                className="bg-white mb-4 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between"
               >
-                <div className="flex items-start gap-6">
+                {/* Product Info */}
+                <div className="flex items-center gap-5 w-full sm:w-auto">
                   <img
                     src={productData.image[0]}
                     alt={productData.name}
-                    className="w-20 sm:w-24 rounded-md shadow-sm"
+                    className="w-20 sm:w-24 rounded-lg object-cover border border-gray-200"
                   />
                   <div>
-                    <p className="text-sm sm:text-lg font-medium">{productData.name}</p>
-                    <div className="flex items-center gap-5 mt-2">
-                      <p>
+                    <p className="text-lg font-semibold text-gray-800">{productData.name}</p>
+                    <div className="flex items-center gap-4 mt-2 text-gray-600">
+                      <p className="font-medium">
                         {currency}
                         {productData.price}
                       </p>
-                      <p className="px-3 py-1 border bg-gray-50 text-sm rounded">
+                      <p className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-md border border-gray-300">
                         {item.size}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <input
-                  onChange={(e) =>
-                    e.target.value === "" || e.target.value === "0"
-                      ? null
-                      : updateQuantity(item._id, item.size, Number(e.target.value))
-                  }
-                  type="number"
-                  min={1}
-                  defaultValue={item.quantity}
-                  className="border w-12 sm:w-16 px-2 py-1 rounded"
-                />
+                {/* Quantity & Remove */}
+                <div className="flex items-center gap-4 mt-4 sm:mt-0">
+                 <input
+  onChange={(e) =>
+    e.target.value === "" || e.target.value === "0"
+      ? null
+      : updateQuantity(item._id, item.size, Number(e.target.value))
+  }
+  type="number"
+  min={1}
+  defaultValue={item.quantity}
+  className="border border-gray-300 w-14 px-2 py-1 text-center rounded-md text-gray-900 bg-white placeholder-gray-500 focus:ring-2 focus:ring-black focus:outline-none"
+/>
 
-                <img
-                  onClick={() => updateQuantity(item._id, item.size, 0)}
-                  src={assets.bin_icon}
-                  alt="Remove item"
-                  className="w-5 cursor-pointer hover:opacity-70"
-                />
+
+                  <button
+                    onClick={() => updateQuantity(item._id, item.size, 0)}
+                    className="p-2 rounded-md hover:bg-gray-100 transition-all"
+                  >
+                    <img
+                      src={assets.bin_icon}
+                      alt="Remove"
+                      className="w-5 h-5 opacity-70 hover:opacity-100"
+                    />
+                  </button>
+                </div>
               </div>
             );
           })
         ) : (
-          <p className="text-gray-500 mt-6 text-center">Your cart is empty 🛒</p>
+          <div className="text-center py-20 text-gray-500 text-lg">
+            Your cart is empty 🛒
+          </div>
         )}
       </div>
 
       {/* TOTAL + CHECKOUT */}
       {cartData.length > 0 && (
-        <div className="flex justify-end my-16">
+        <div className="flex justify-end max-w-5xl mx-auto px-4 sm:px-8 mt-12 mb-20">
           <div className="w-full sm:w-[450px]">
             <CartTotal />
             <div className="w-full text-end">
-             <button
-  type="button"
-  onClick={() => {
-    if (!token) {
-      navigate("/login"); // redirect if not logged in
-    } else {
-      navigate("/place-order"); // proceed if logged in
-    }
-  }}
-  className="bg-black text-white text-sm my-6 px-8 py-3 rounded-md hover:bg-gray-800 transition-all"
->
-  PROCEED TO CHECKOUT
-</button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!token) {
+                    navigate("/login");
+                  } else {
+                    navigate("/place-order");
+                  }
+                }}
+                className="bg-black text-white text-sm font-semibold my-6 px-8 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-800 transition-all"
+              >
+                PROCEED TO CHECKOUT
+              </button>
             </div>
           </div>
         </div>

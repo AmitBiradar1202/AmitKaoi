@@ -8,6 +8,8 @@ import Add from "./pages/Add";
 import List from "./pages/List";
 import Order from "./pages/Order";
 import { assets } from "./assets/assets.js";
+// top of App.jsx — add this (adjust path if needed)
+import CouponPage from "./pages/CouponPage";
 
 
 export const backendUrl = "https://amitkaoi.onrender.com";
@@ -48,8 +50,10 @@ const App = () => {
               <Route path='/add' element={<Add token={token}/>} />
               <Route path='/list' element={<List token={token}/>} />
               <Route path='/order' element={<Order token={token}/>} />
+               <Route path="/coupons" element={<CouponPage token={token} />} /> {/* ✅ new route */}
             </Routes>
           </div>
+
         {/* <img src={assets.Admin} alt=""  className='w-90'/> */}
         </div>
         
