@@ -115,7 +115,7 @@ const Cart = () => {
                   } else {
                     navigate("/place-order");
                   }
-                }}
+                }}          
                 className="bg-black text-white text-sm font-semibold my-6 px-8 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-800 transition-all"
               >
                 PROCEED TO CHECKOUT

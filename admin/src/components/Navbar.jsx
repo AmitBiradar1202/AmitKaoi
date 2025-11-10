@@ -15,7 +15,7 @@ const Navbar = ({ setToken }) => {
        
         <a href="https://amit-kaoi-admin.vercel.app/" target="_blank" rel="noopener noreferrer">
   <img
-    src={assets.logo} 
+    src={assets.SkCollections} 
     alt="Logo"
     className=" cursor-pointer w-12 h-12 object-contain rounded-xl hover:scale-105 transition-transform duration-300"
   />

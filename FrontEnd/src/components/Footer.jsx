@@ -8,7 +8,7 @@ const Footer = () => {
         
         {/* Logo + About */}
         <div>
-          <img src={assets.logo} alt="Logo" className="mb-5 w-36" />
+          <img src={assets.SkCollections} alt="Logo" className="mb-5 w-36" />
           <p className="text-gray-600 leading-relaxed">
             Elevate your style with premium streetwear and timeless essentials.
             Designed with passion, crafted with care — because your fashion
@@ -53,7 +53,7 @@ const Footer = () => {
           </a>
         </p>
         <p className="text-gray-500 mt-1">
-          © {new Date().getFullYear()} AmitKaoi.com — All Rights Reserved.
+          © {new Date().getFullYear()} SKCollections.com — All Rights Reserved.
         </p>
       </div>
     </footer>

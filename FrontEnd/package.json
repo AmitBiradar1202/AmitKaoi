@@ -16,6 +16,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.0",
     "react-slick": "^0.30.3",
+    "react-stacked-center-carousel": "^1.0.14",
     "react-toastify": "^11.0.2",
     "slick-carousel": "^1.8.1"
   },

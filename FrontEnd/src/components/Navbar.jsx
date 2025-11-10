@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between py-4 px-4 sm:px-10 font-medium">
         {/* Logo */}
         <Link to="/" className="hover:opacity-80 transition">
-          <img src={assets.logo} className="w-36 sm:w-40" alt="LOGO" />
+          <img src={assets.SkCollections} className="w-36 sm:w-40" alt="LOGO" />
         </Link>
 
         {/* Nav Links */}

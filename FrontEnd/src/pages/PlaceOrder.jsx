@@ -36,7 +36,7 @@ const PlaceOrder = () => {
       currency: order.currency,
       name: "AmitBiradar1202 Fashion Store",
       description: "Secure Payment for your Order",
-      image: assets.logo,
+      image: assets.SkCollections,
       order_id: order.id,
       receipt: order.receipt,
       handler: async (response) => {

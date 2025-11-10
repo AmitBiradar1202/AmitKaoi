@@ -5,7 +5,7 @@ import order_icon from './order_icon.png'
 import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.svg'
 import Admin from './Admin.svg'
-
+import SkCollections from './SkCollections.png'
 import bg from './bg.png';
 
 
@@ -17,5 +17,6 @@ export const assets = {
     upload_area,
     parcel_icon,
     Admin,
-    bg
+    bg,
+    SkCollections
 }

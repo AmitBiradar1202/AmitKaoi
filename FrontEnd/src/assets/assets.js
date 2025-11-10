@@ -73,7 +73,7 @@ import star_dull_icon from './star_dull_icon.png'
 import star_icon from './star_icon.png'
 import stripe_logo from './stripe_logo.png'
 import support_img from './support_img.png'
-
+import SkCollections from './SkCollections.png'
 import Hero2 from './Hero2.png'
 import Hero3 from './Hero3.png'
 import Hero4 from './Hero4.png'
@@ -109,7 +109,7 @@ export const assets = {
     razorpay_logo,
     stripe_logo,
     cross_icon,
-
+SkCollections,
     Hero2,
     Hero3,
     Hero4,
