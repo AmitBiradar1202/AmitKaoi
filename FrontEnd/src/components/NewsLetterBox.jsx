@@ -26,7 +26,7 @@ const NewsLetterBox = () => {
       </motion.p>
 
       <p className="text-gray-500 mt-3 text-base sm:text-lg max-w-md mx-auto">
-        Join <span className="font-medium">Amit's Fashion Family</span> for exclusive deals, early drops, and the latest streetwear trends.
+        Join <span className="font-medium">SKCollection's Fashion Family</span> for exclusive deals, early drops, and the latest streetwear trends.
       </p>
 
       <motion.form
