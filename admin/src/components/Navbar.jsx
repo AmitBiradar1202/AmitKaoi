@@ -13,7 +13,7 @@ const Navbar = ({ setToken }) => {
       {/* Left: Logo + Title */}
       <div className="flex items-center gap-3">
        
-        <a href="https://skcollection.vercel.app" target="_blank" rel="noopener noreferrer">
+        <a href="https://amit-kaoi-admin.vercel.app/" target="_blank" rel="noopener noreferrer">
   <img
     src={assets.SkCollections} 
     alt="Logo"
@@ -32,7 +32,7 @@ const Navbar = ({ setToken }) => {
 
       {/* Center: Link to main site */}
       <a  
-        href="https://amit-kaoi.vercel.app/"
+        href="https://skcollection.vercel.app"
         target="_blank"
         rel="noreferrer"
         className="hidden sm:flex items-center gap-1 text-gray-700 
