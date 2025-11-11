@@ -11,6 +11,8 @@ const Add = ({ token }) => {
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
   const [image4, setImage4] = useState(false);
+  const [image5, setImage5] = useState(false);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -41,7 +43,8 @@ const Add = ({ token }) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
 
-      [image1, image2, image3, image4].forEach((img, i) => {
+      // ✅ Include all 5 images
+      [image1, image2, image3, image4, image5].forEach((img, i) => {
         if (img) formData.append(`image${i + 1}`, img);
       });
 
@@ -53,6 +56,7 @@ const Add = ({ token }) => {
 
       if (response.data.success) {
         toast.success("✅ Product added successfully!");
+        // Reset all fields
         setName("");
         setDescription("");
         setPrice("");
@@ -60,6 +64,7 @@ const Add = ({ token }) => {
         setImage2(false);
         setImage3(false);
         setImage4(false);
+        setImage5(false);
         setSizes([]);
         setBestseller(false);
       } else toast.error(response.data.message);
@@ -82,10 +87,17 @@ const Add = ({ token }) => {
       >
         {/* Upload Section */}
         <div>
-          <p className="mb-2 font-semibold">Product Images</p>
+          <p className="mb-2 font-semibold">Product Images (Up to 5)</p>
           <div className="flex gap-4 flex-wrap">
-            {[image1, image2, image3, image4].map((img, idx) => {
-              const setImg = [setImage1, setImage2, setImage3, setImage4][idx];
+            {[image1, image2, image3, image4, image5].map((img, idx) => {
+              const setImg = [
+                setImage1,
+                setImage2,
+                setImage3,
+                setImage4,
+                setImage5,
+              ][idx];
+
               return (
                 <label
                   key={idx}
@@ -148,73 +160,72 @@ const Add = ({ token }) => {
           </div>
 
           <div className="relative overflow-visible z-50">
-  <label className="font-semibold">Sub Category</label>
-  <div className="relative">
-    <select
-      value={subCategory}
-      onChange={(e) => setSubCategory(e.target.value)}
-      className="mt-2 w-full border px-3 py-2 rounded-lg bg-white z-50 relative focus:ring-2 focus:ring-pink-300 outline-none"
-    >
-      <optgroup label="Topwear">
-        <option value="T-Shirts">T-Shirts</option>
-        <option value="Shirts">Shirts</option>
-        <option value="Crop Tops">Crop Tops</option>
-        <option value="Hoodies">Hoodies</option>
-        <option value="Sweatshirts">Sweatshirts</option>
-        <option value="Blazers">Blazers</option>
-        <option value="Kurtas & Kurtis">Kurtas & Kurtis</option>
-      </optgroup>
+            <label className="font-semibold">Sub Category</label>
+            <div className="relative">
+              <select
+                value={subCategory}
+                onChange={(e) => setSubCategory(e.target.value)}
+                className="mt-2 w-full border px-3 py-2 rounded-lg bg-white z-50 relative focus:ring-2 focus:ring-pink-300 outline-none"
+              >
+                <optgroup label="Topwear">
+                  <option value="T-Shirts">T-Shirts</option>
+                  <option value="Shirts">Shirts</option>
+                  <option value="Crop Tops">Crop Tops</option>
+                  <option value="Hoodies">Hoodies</option>
+                  <option value="Sweatshirts">Sweatshirts</option>
+                  <option value="Blazers">Blazers</option>
+                  <option value="Kurtas & Kurtis">Kurtas & Kurtis</option>
+                </optgroup>
 
-      <optgroup label="Bottomwear">
-        <option value="Jeans">Jeans</option>
-        <option value="Trousers">Trousers</option>
-        <option value="Shorts">Shorts</option>
-        <option value="Track Pants">Track Pants</option>
-        <option value="Skirts">Skirts</option>
-        <option value="Leggings">Leggings</option>
-        <option value="Cargo Pants">Cargo Pants</option>
-      </optgroup>
+                <optgroup label="Bottomwear">
+                  <option value="Jeans">Jeans</option>
+                  <option value="Trousers">Trousers</option>
+                  <option value="Shorts">Shorts</option>
+                  <option value="Track Pants">Track Pants</option>
+                  <option value="Skirts">Skirts</option>
+                  <option value="Leggings">Leggings</option>
+                  <option value="Cargo Pants">Cargo Pants</option>
+                </optgroup>
 
-      <optgroup label="Winterwear">
-        <option value="Jackets">Jackets</option>
-        <option value="Sweaters">Sweaters</option>
-        <option value="Sweatshirts">Sweatshirts</option>
-        <option value="Coats">Coats</option>
-        <option value="Cardigans">Cardigans</option>
-        <option value="Pullovers">Pullovers</option>
-      </optgroup>
+                <optgroup label="Winterwear">
+                  <option value="Jackets">Jackets</option>
+                  <option value="Sweaters">Sweaters</option>
+                  <option value="Sweatshirts">Sweatshirts</option>
+                  <option value="Coats">Coats</option>
+                  <option value="Cardigans">Cardigans</option>
+                  <option value="Pullovers">Pullovers</option>
+                </optgroup>
 
-      <optgroup label="Sneakers">
-        <option value="Casual Sneakers">Casual Sneakers</option>
-        <option value="High Tops">High Tops</option>
-        <option value="Low Tops">Low Tops</option>
-        <option value="Slip-Ons">Slip-Ons</option>
-      </optgroup>
+                <optgroup label="Sneakers">
+                  <option value="Casual Sneakers">Casual Sneakers</option>
+                  <option value="High Tops">High Tops</option>
+                  <option value="Low Tops">Low Tops</option>
+                  <option value="Slip-Ons">Slip-Ons</option>
+                </optgroup>
 
-      <optgroup label="Formal Shoes">
-        <option value="Oxfords">Oxfords</option>
-        <option value="Brogues">Brogues</option>
-        <option value="Loafers">Loafers</option>
-        <option value="Derby Shoes">Derby Shoes</option>
-      </optgroup>
+                <optgroup label="Formal Shoes">
+                  <option value="Oxfords">Oxfords</option>
+                  <option value="Brogues">Brogues</option>
+                  <option value="Loafers">Loafers</option>
+                  <option value="Derby Shoes">Derby Shoes</option>
+                </optgroup>
 
-      <optgroup label="Sports Shoes">
-        <option value="Running Shoes">Running Shoes</option>
-        <option value="Training Shoes">Training Shoes</option>
-        <option value="Walking Shoes">Walking Shoes</option>
-        <option value="Football Shoes">Football Shoes</option>
-      </optgroup>
+                <optgroup label="Sports Shoes">
+                  <option value="Running Shoes">Running Shoes</option>
+                  <option value="Training Shoes">Training Shoes</option>
+                  <option value="Walking Shoes">Walking Shoes</option>
+                  <option value="Football Shoes">Football Shoes</option>
+                </optgroup>
 
-      <optgroup label="Sandals & Slippers">
-        <option value="Flip Flops">Flip Flops</option>
-        <option value="Slides">Slides</option>
-        <option value="Casual Sandals">Casual Sandals</option>
-        <option value="Crocs">Crocs</option>
-      </optgroup>
-    </select>
-  </div>
-</div>
-
+                <optgroup label="Sandals & Slippers">
+                  <option value="Flip Flops">Flip Flops</option>
+                  <option value="Slides">Slides</option>
+                  <option value="Casual Sandals">Casual Sandals</option>
+                  <option value="Crocs">Crocs</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
 
           <div>
             <label className="font-semibold">Price (₹)</label>
@@ -234,9 +245,9 @@ const Add = ({ token }) => {
           <p className="font-semibold mb-2">Available Sizes</p>
           <div className="flex flex-wrap gap-2">
             {(category === "Shoes"
-      ? ["6", "7", "8", "9", "10", "11"]
-      : ["S", "M", "L", "XL", "XXL"]
-    ).map((size) => (
+              ? ["6", "7", "8", "9", "10", "11"]
+              : ["S", "M", "L", "XL", "XXL"]
+            ).map((size) => (
               <button
                 type="button"
                 key={size}
