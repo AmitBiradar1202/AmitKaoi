@@ -34,10 +34,11 @@ const Hero = () => {
         {/* <h1 className="huge-title -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">
   SK<span className="opacity-90">COLLECTIONS</span>
 </h1> */}
-<h1 className="huge-title -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">
-  SA<span className=" -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">COLLECTIONS</span>
-</h1>
-
+<<div className="flex items-center justify-center min-h-screen text-center">
+  <h1 className="huge-title text-5xl sm:text-6xl md:text-[100px] lg:text-[120px] leading-none text-transparent bg-clip-text glass-text">
+    SA <span className="text-transparent bg-clip-text glass-text">COLLECTIONS</span>
+  </h1>
+</div>
 
 
 
