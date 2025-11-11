@@ -31,11 +31,32 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-5 text-gray-800">Get In Touch</h3>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li>📞 +91 123 168 0976</li>
-            <li>✉️ amitbiradar1202@gmail.com</li>
-            <li>📸 Instagram</li>
-            <li>📘 Facebook</li>
-          </ul>
+  <li>📞 <a href="tel:+911231680976" className="hover:text-yellow-500 transition">+91 123 168 0976</a></li>
+  
+  <li>
+    ✉️ 
+    <a 
+      href="mailto:sacollections@gmail.com" 
+      className="hover:text-yellow-500 transition ml-1"
+    >
+      sacollections@gmail.com
+    </a>
+  </li>
+
+  <li>
+    📸 
+    <a 
+      href="https://www.instagram.com/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-yellow-500 transition ml-1"
+    >
+      Instagram
+    </a>
+  </li>
+
+  
+</ul>>
         </div>
       </div>
 
@@ -44,7 +65,7 @@ const Footer = () => {
         <p className="text-gray-600">
           Made with 💖 by{" "}
           <a
-            href="https://github.com/AmitBiradar1202"
+            href=" "
             target="_blank"
             rel="noopener noreferrer"
             className="text-black font-medium hover:underline"
