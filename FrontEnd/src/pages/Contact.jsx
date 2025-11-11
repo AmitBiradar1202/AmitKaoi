@@ -30,13 +30,13 @@ const Contact = () => {
             </p>
             <p className='text-gray-500 mt-2'>
               Tel: 04646545556 <br />
-              Email: amitbiradar1202@gmail.com
+              Email: skcollections@gmail.com
             </p>
           </div>
 
           {/* Careers */}
           <div>
-            <p className='font-semibold text-xl text-gray-700'>Careers at AmitKaoi</p>
+            <p className='font-semibold text-xl text-gray-700'>Careers at SKCollections</p>
             <p className='text-gray-500 mt-1'>Learn more about our teams and job openings.</p>
             <button className='mt-2 border border-black px-6 py-2 text-sm font-medium hover:bg-black hover:text-white rounded transition-colors'>
               Explore Jobs

@@ -43,10 +43,12 @@ const RelatedProduct = ({ category, subCategory }) => {
               transition={{ duration: 0.3, delay: idx * 0.05 }}
             >
               <ProductItem
-                id={item._id}
-                image={item.image}
-                name={item.name}
-                price={item.price}
+                key={idx}
+  id={item._id}
+  image={item.image}
+  name={item.name}
+  price={item.price}
+  discount={item.discount}
               />
             </motion.div>
           ))}

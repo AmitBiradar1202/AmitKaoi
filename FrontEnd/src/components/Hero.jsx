@@ -1,56 +1,45 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { assets } from '../assets/assets.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const videos = [
-    assets.video1,
-    assets.video2,
-    assets.video3,
-    assets.video4,
-    assets.video5
-  ];
+  const videoUrl =
+    "https://genrage.com/cdn/shop/videos/c/vp/35306b2c25374562bc65ad3be788c312/35306b2c25374562bc65ad3be788c312.HD-1080p-7.2Mbps-59110661.mp4?v=0";
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % videos.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
-    <section
-      className="relative w-full h-screen flex items-center justify-center overflow-hidden cursor-pointer"
-      // cursor-pointer added here to always show hand
-    >
-      {/* Preload all videos, toggle opacity */}
-      {videos.map((video, idx) => (
-        <motion.video
-          key={idx}
-          src={video}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: currentIndex === idx ? 1 : 0 }}
-          transition={{ opacity: { duration: 0.5 } }}
-        />
-      ))}
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden cursor-pointer bg-black">
+      {/* Video */}
+      <motion.video
+        key={videoUrl}
+        src={videoUrl}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onLoadedData={() => setVideoLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+          videoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
 
       {/* dark overlay */}
       <div className="absolute inset-0 bg-black/70"></div>
 
       {/* Content */}
       <div className="relative z-20 max-w-6xl w-full px-6 text-center">
-        <h1 className="huge-title text-7xl md:text-[120px] leading-none text-white">
-          NEW <span className="text-white/90">DROP</span>
-        </h1>
+        {/* <h1 className="huge-title -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">
+  SK<span className="opacity-90">COLLECTIONS</span>
+</h1> */}
+<h1 className="huge-title -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">
+  SA<span className=" -mt-300 text-7xl md:text-[120px] leading-none text-transparent bg-clip-text glass-text">COLLECTIONS</span>
+</h1>
+
+
+
 
         <p className="mt-6 text-sm md:text-lg text-gray-300 max-w-2xl mx-auto">
           Minimal. Street. Elevated. Shop the latest curated pieces — limited release.

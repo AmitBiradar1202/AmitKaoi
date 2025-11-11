@@ -24,6 +24,29 @@ body {
   font-family: 'Anton', sans-serif;
   letter-spacing: 0.02em;
 }
+.glass-text {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7), transparent 40%),
+    linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1)),
+    linear-gradient(0deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+  background-blend-mode: overlay;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+  text-shadow: 0 2px 10px rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+}
+
+.glass-text {
+  background-size: 200% 200%;
+  animation: waterMove 6s infinite linear;
+}
+
+@keyframes waterMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 
 
 

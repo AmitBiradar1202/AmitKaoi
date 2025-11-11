@@ -49,11 +49,11 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-black font-medium hover:underline"
           >
-            Amit Shivaji Biradar
+            SACollections
           </a>
         </p>
         <p className="text-gray-500 mt-1">
-          © {new Date().getFullYear()} SKCollections.com — All Rights Reserved.
+          © {new Date().getFullYear()} SACollections.com — All Rights Reserved.
         </p>
       </div>
     </footer>

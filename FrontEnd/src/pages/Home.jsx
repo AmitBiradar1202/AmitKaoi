@@ -98,31 +98,33 @@ const Home = () => {
   <h2 className="text-2xl font-semibold mb-12 text-black">What Our Customers Say</h2>
   <div className="grid md:grid-cols-3 gap-8">
     {/* Amit Biradar */}
-    <div className="bg-white p-6 rounded-xl shadow-lg">
-      <p className="text-gray-600 mb-4 ">
-        "The product quality is amazing! Amit’s experience with it made my life so much easier. Highly recommended!"
-      </p>
-      <h3 className="font-semibold text-lg   text-yellow-400">Amit Biradar</h3>
-      <p className="text-sm text-gray-400">Verified Customer</p>
-    </div>
+    {/* Amit Biradar */}
+<div className="bg-white p-6 rounded-xl shadow-lg">
+  <p className="text-gray-600 mb-4">
+    “Absolutely love the fit and finish! SA Collections really nails the premium streetwear vibe. Worth every rupee.”
+  </p>
+  <h3 className="font-semibold text-lg text-yellow-400">Amit Biradar</h3>
+  <p className="text-sm text-gray-400">Verified Customer</p>
+</div>
 
-    {/* Arjun Malla */}
-    <div className="bg-white p-6 rounded-xl shadow-lg">
-      <p className="text-gray-600 mb-4">
-        "I love how durable and stylish the product is. Arjun guided me through the features perfectly."
-      </p>
-      <h3 className="font-semibold text-lg  text-yellow-400">Arjun Malla</h3>
-      <p className="text-sm text-gray-400">Verified Customer</p>
-    </div>
+{/* Arjun Malla */}
+<div className="bg-white p-6 rounded-xl shadow-lg">
+  <p className="text-gray-600 mb-4">
+    “Clean designs, great comfort, and perfect for daily wear. You can feel the quality in every stitch.”
+  </p>
+  <h3 className="font-semibold text-lg text-yellow-400">Arjun Malla</h3>
+  <p className="text-sm text-gray-400">Verified Customer</p>
+</div>
 
-    {/* Shoeb Manjawar */}
-    <div className="bg-white p-6 rounded-xl shadow-lg">
-      <p className="text-gray-600 mb-4">
-        "Shoeb recommended this product and it exceeded my expectations. Excellent quality and very useful!"
-      </p>
-      <h3 className="font-semibold text-lg  text-yellow-400">Shoeb Manjawar</h3>
-      <p className="text-sm text-gray-400">Verified Customer</p>
-    </div>
+{/* Shoeb Manjawar */}
+<div className="bg-white p-6 rounded-xl shadow-lg">
+  <p className="text-gray-600 mb-4">
+    “The collection feels exclusive and well-made. Got so many compliments wearing SACollections. Totally satisfied!”
+  </p>
+  <h3 className="font-semibold text-lg text-yellow-400">Shoeb Manjawar</h3>
+  <p className="text-sm text-gray-400">Verified Customer</p>
+</div>
+
   </div>
 </section>
 
