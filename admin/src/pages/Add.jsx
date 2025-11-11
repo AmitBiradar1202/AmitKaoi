@@ -7,11 +7,7 @@ const backendUrl =
   import.meta.env.VITE_BACKEND_URL || "https://amitkaoi.onrender.com";
 
 const Add = ({ token }) => {
-  const [image1, setImage1] = useState(false);
-  const [image2, setImage2] = useState(false);
-  const [image3, setImage3] = useState(false);
-  const [image4, setImage4] = useState(false);
-  const [image5, setImage5] = useState(false);
+  const [images, setImages] = useState(Array(8).fill(false));
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -43,8 +39,8 @@ const Add = ({ token }) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
 
-      // ✅ Include all 5 images
-      [image1, image2, image3, image4, image5].forEach((img, i) => {
+      // ✅ Append all 8 images
+      images.forEach((img, i) => {
         if (img) formData.append(`image${i + 1}`, img);
       });
 
@@ -60,11 +56,7 @@ const Add = ({ token }) => {
         setName("");
         setDescription("");
         setPrice("");
-        setImage1(false);
-        setImage2(false);
-        setImage3(false);
-        setImage4(false);
-        setImage5(false);
+        setImages(Array(8).fill(false));
         setSizes([]);
         setBestseller(false);
       } else toast.error(response.data.message);
@@ -87,35 +79,29 @@ const Add = ({ token }) => {
       >
         {/* Upload Section */}
         <div>
-          <p className="mb-2 font-semibold">Product Images (Up to 5)</p>
+          <p className="mb-2 font-semibold">Product Images (Up to 8)</p>
           <div className="flex gap-4 flex-wrap">
-            {[image1, image2, image3, image4, image5].map((img, idx) => {
-              const setImg = [
-                setImage1,
-                setImage2,
-                setImage3,
-                setImage4,
-                setImage5,
-              ][idx];
-
-              return (
-                <label
-                  key={idx}
-                  className="w-32 h-32 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer hover:border-pink-400 transition"
-                >
-                  <img
-                    src={img ? URL.createObjectURL(img) : assets.upload_area}
-                    alt=""
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                  <input
-                    type="file"
-                    hidden
-                    onChange={(e) => setImg(e.target.files[0])}
-                  />
-                </label>
-              );
-            })}
+            {images.map((img, idx) => (
+              <label
+                key={idx}
+                className="w-28 h-28 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer hover:border-pink-400 transition"
+              >
+                <img
+                  src={img ? URL.createObjectURL(img) : assets.upload_area}
+                  alt=""
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => {
+                    const newImages = [...images];
+                    newImages[idx] = e.target.files[0];
+                    setImages(newImages);
+                  }}
+                />
+              </label>
+            ))}
           </div>
         </div>
 
@@ -172,56 +158,15 @@ const Add = ({ token }) => {
                   <option value="Shirts">Shirts</option>
                   <option value="Crop Tops">Crop Tops</option>
                   <option value="Hoodies">Hoodies</option>
-                  <option value="Sweatshirts">Sweatshirts</option>
-                  <option value="Blazers">Blazers</option>
-                  <option value="Kurtas & Kurtis">Kurtas & Kurtis</option>
                 </optgroup>
-
                 <optgroup label="Bottomwear">
                   <option value="Jeans">Jeans</option>
-                  <option value="Trousers">Trousers</option>
                   <option value="Shorts">Shorts</option>
                   <option value="Track Pants">Track Pants</option>
-                  <option value="Skirts">Skirts</option>
-                  <option value="Leggings">Leggings</option>
-                  <option value="Cargo Pants">Cargo Pants</option>
                 </optgroup>
-
-                <optgroup label="Winterwear">
-                  <option value="Jackets">Jackets</option>
-                  <option value="Sweaters">Sweaters</option>
-                  <option value="Sweatshirts">Sweatshirts</option>
-                  <option value="Coats">Coats</option>
-                  <option value="Cardigans">Cardigans</option>
-                  <option value="Pullovers">Pullovers</option>
-                </optgroup>
-
-                <optgroup label="Sneakers">
-                  <option value="Casual Sneakers">Casual Sneakers</option>
-                  <option value="High Tops">High Tops</option>
-                  <option value="Low Tops">Low Tops</option>
-                  <option value="Slip-Ons">Slip-Ons</option>
-                </optgroup>
-
-                <optgroup label="Formal Shoes">
-                  <option value="Oxfords">Oxfords</option>
-                  <option value="Brogues">Brogues</option>
-                  <option value="Loafers">Loafers</option>
-                  <option value="Derby Shoes">Derby Shoes</option>
-                </optgroup>
-
-                <optgroup label="Sports Shoes">
-                  <option value="Running Shoes">Running Shoes</option>
-                  <option value="Training Shoes">Training Shoes</option>
-                  <option value="Walking Shoes">Walking Shoes</option>
-                  <option value="Football Shoes">Football Shoes</option>
-                </optgroup>
-
-                <optgroup label="Sandals & Slippers">
-                  <option value="Flip Flops">Flip Flops</option>
-                  <option value="Slides">Slides</option>
-                  <option value="Casual Sandals">Casual Sandals</option>
-                  <option value="Crocs">Crocs</option>
+                <optgroup label="Shoes">
+                  <option value="Sneakers">Sneakers</option>
+                  <option value="Sandals">Sandals</option>
                 </optgroup>
               </select>
             </div>
