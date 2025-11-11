@@ -8,12 +8,12 @@ const Order = ({ token }) => {
   const [orders, setOrders] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅ Added loading state
+  const [loading, setLoading] = useState(true); // ✅ loading only for initial fetch
 
   const fetchAllOrders = async () => {
     if (!token) return;
     try {
-      setLoading(true); // start loading
+      setLoading(true);
       const response = await axios.post(`${backendUrl}/api/order/list`, {}, { headers: { token } });
       if (response.data.success) setOrders(response.data.orders);
       else toast.error("Something went wrong");
@@ -21,16 +21,27 @@ const Order = ({ token }) => {
       console.log(err);
       toast.error(err.message);
     } finally {
-      setLoading(false); // stop loading
+      setLoading(false);
     }
   };
 
+  // ✅ Optimized - no full reload
   const statusHandler = async (e, orderId) => {
+    const newStatus = e.target.value;
     try {
-      const response = await axios.post(`${backendUrl}/api/order/status`, { orderId, status: e.target.value }, { headers: { token } });
+      const response = await axios.post(
+        `${backendUrl}/api/order/status`,
+        { orderId, status: newStatus },
+        { headers: { token } }
+      );
+
       if (response.data?.success) {
         toast.success("Order status updated");
-        await fetchAllOrders();
+        setOrders((prev) =>
+          prev.map((order) =>
+            order._id === orderId ? { ...order, status: newStatus } : order
+          )
+        );
       } else toast.error(response.data?.message || "Something went wrong");
     } catch (err) {
       console.log(err);
@@ -38,12 +49,13 @@ const Order = ({ token }) => {
     }
   };
 
+  // ✅ Optimized - no full reload
   const deleteOrder = async (orderId) => {
     try {
       const response = await axios.delete(`${backendUrl}/api/order/${orderId}`, { headers: { token } });
       if (response.data?.success) {
         toast.success("Order deleted successfully");
-        await fetchAllOrders();
+        setOrders((prev) => prev.filter((order) => order._id !== orderId));
       } else toast.error(response.data?.message || "Something went wrong");
     } catch (err) {
       console.log(err);
@@ -100,7 +112,7 @@ const Order = ({ token }) => {
 
       <div className="space-y-6">
         {loading ? (
-          // ✅ Loading Spinner
+          // ✅ Loading Spinner only once at start
           <div className="flex justify-center items-center py-16">
             <div className="w-10 h-10 border-4 border-white-400 border-t-transparent rounded-full animate-spin"></div>
           </div>

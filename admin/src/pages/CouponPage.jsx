@@ -15,10 +15,27 @@ const CouponPage = ({ token }) => {
 
 
   // Fetch coupons
-  const fetchCoupons = async () => {
-    const res = await axios.get(`${backendUrl}`);
-    setCoupons(res.data.coupons);
-  };
+ const fetchCoupons = async () => {
+  try {
+    const res = await axios.get(`${backendUrl}/api/coupon`); // must match router mount path
+
+    console.log("Coupons API response:", res.data);
+
+    // ✅ Fix: extract the actual array
+    if (Array.isArray(res.data.coupons)) {
+      setCoupons(res.data.coupons);
+    } else if (Array.isArray(res.data)) {
+      setCoupons(res.data);
+    } else {
+      console.warn("Unexpected response format:", res.data);
+      setCoupons([]);
+    }
+  } catch (err) {
+    console.error("Error fetching coupons:", err);
+    setCoupons([]); // prevent crash
+  }
+};
+
 
   useEffect(() => {
     fetchCoupons();
@@ -28,7 +45,7 @@ const CouponPage = ({ token }) => {
   const handleAddCoupon = async (e) => {
     e.preventDefault();
     if (!form.code || !form.discountAmount) return alert("Fill required fields");
-    await axios.post(`${backendUrl}/add`, form, {
+    await axios.post(`${backendUrl}/api/coupon/add`, form, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setForm({ code: "", discountAmount: "", expiryDate: "", minPurchase: "" });
@@ -37,13 +54,13 @@ const CouponPage = ({ token }) => {
 
   // Remove expiry
   const handleRemoveExpiry = async (id) => {
-    await axios.put(`${backendUrl}/update/${id}`, { expiryDate: null });
+    await axios.put(`${backendUrl}/api/coupon/update/${id}`, { expiryDate: null });
     fetchCoupons();
   };
 
   // Delete coupon
   const handleDelete = async (id) => {
-    await axios.delete(`${backendUrl}/delete/${id}`);
+    await axios.delete(`${backendUrl}/api/coupon/delete/${id}`);
     fetchCoupons();
   };
 
